@@ -5,7 +5,7 @@
 #include "resource.h"
 
 #define USEHICON
-//#define MODELESS
+#define MODELESS
 #define PROPTITLE
 //#define WIZARD
 //#define NOAPPLYNOW
@@ -49,6 +49,13 @@ LRESULT Page0_OnNotify(HWND hwnd, int idFrom, LPNMHDR pnmhdr)
         MessageBox(hwnd, TEXT("Page0 applied!"), TEXT("Info"), MB_ICONINFORMATION);
         //SetWindowLongPtr(hwnd, DWLP_MSGRESULT, PSNRET_INVALID_NOCHANGEPAGE); // Prevent
         SetWindowLongPtr(hwnd, DWLP_MSGRESULT, PSNRET_NOERROR); // Continue
+#ifdef MODELESS
+        if (PropSheet_GetCurrentPageHwnd(GetParent(hwnd)))
+        {
+            DestroyWindow(hwnd);
+            PostQuitMessage(0);
+        }
+#endif
         return TRUE;
     case PSN_WIZBACK:
         PropSheet_SetCurSel(GetParent(hwnd), NULL, 0);
@@ -113,6 +120,13 @@ LRESULT Page1_OnNotify(HWND hwnd, int idFrom, LPNMHDR pnmhdr)
         MessageBox(hwnd, TEXT("Page1 applied!"), TEXT("Info"), MB_ICONINFORMATION);
         //SetWindowLongPtr(hwnd, DWLP_MSGRESULT, PSNRET_INVALID_NOCHANGEPAGE); // Prevent
         SetWindowLongPtr(hwnd, DWLP_MSGRESULT, PSNRET_NOERROR); // Continue
+#ifdef MODELESS
+        if (PropSheet_GetCurrentPageHwnd(GetParent(hwnd)))
+        {
+            DestroyWindow(hwnd);
+            PostQuitMessage(0);
+        }
+#endif
         return TRUE;
     case PSN_WIZBACK:
         PropSheet_SetCurSel(GetParent(hwnd), NULL, 0);
@@ -177,6 +191,13 @@ LRESULT Page2_OnNotify(HWND hwnd, int idFrom, LPNMHDR pnmhdr)
         MessageBox(hwnd, TEXT("Page2 applied!"), TEXT("Info"), MB_ICONINFORMATION);
         //SetWindowLongPtr(hwnd, DWLP_MSGRESULT, PSNRET_INVALID_NOCHANGEPAGE); // Prevent
         SetWindowLongPtr(hwnd, DWLP_MSGRESULT, PSNRET_NOERROR); // Continue
+#ifdef MODELESS
+        if (PropSheet_GetCurrentPageHwnd(GetParent(hwnd)))
+        {
+            DestroyWindow(hwnd);
+            PostQuitMessage(0);
+        }
+#endif
         return TRUE;
     case PSN_WIZBACK:
         PropSheet_SetCurSel(GetParent(hwnd), NULL, 1);
@@ -262,7 +283,7 @@ WinMain(HINSTANCE   hInstance,
     MSG msg;
     while (::GetMessage(&msg, NULL, 0, 0))
     {
-        if (::IsDialogMessage(hwndPropSheetModeless, &msg))
+        if (PropSheet_IsDialogMessage(hwndPropSheetModeless, &msg))
             continue;
 
         ::TranslateMessage(&msg);
