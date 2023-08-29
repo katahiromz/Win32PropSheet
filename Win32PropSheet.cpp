@@ -24,15 +24,15 @@ void Page0_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify)
     case edt1:
         if (codeNotify == EN_CHANGE)
         {
-            PropSheet_Changed(GetParent(hwnd), hwnd);
+            PropSheet_Changed(::GetParent(hwnd), hwnd);
             break;
         }
         break;
     case psh1:
-        PropSheet_PressButton(GetParent(hwnd), PSBTN_APPLYNOW);
+        PropSheet_PressButton(::GetParent(hwnd), PSBTN_APPLYNOW);
         break;
     case psh2:
-        PropSheet_UnChanged(GetParent(hwnd), hwnd);
+        PropSheet_UnChanged(::GetParent(hwnd), hwnd);
         break;
     }
 }
@@ -49,23 +49,16 @@ LRESULT Page0_OnNotify(HWND hwnd, int idFrom, LPNMHDR pnmhdr)
         MessageBox(hwnd, TEXT("Page0 applied!"), TEXT("Info"), MB_ICONINFORMATION);
         //SetWindowLongPtr(hwnd, DWLP_MSGRESULT, PSNRET_INVALID_NOCHANGEPAGE); // Prevent
         SetWindowLongPtr(hwnd, DWLP_MSGRESULT, PSNRET_NOERROR); // Continue
-#ifdef MODELESS
-        if (PropSheet_GetCurrentPageHwnd(GetParent(hwnd)))
-        {
-            DestroyWindow(hwnd);
-            PostQuitMessage(0);
-        }
-#endif
         return TRUE;
     case PSN_WIZBACK:
-        PropSheet_SetCurSel(GetParent(hwnd), NULL, 0);
+        PropSheet_SetCurSel(::GetParent(hwnd), NULL, 0);
         break;
     case PSN_QUERYCANCEL:
     case PSN_WIZFINISH:
-        DestroyWindow(GetParent(hwnd));
+        ::DestroyWindow(::GetParent(hwnd));
         break;
     case PSN_WIZNEXT:
-        PropSheet_SetCurSel(GetParent(hwnd), NULL, 1);
+        PropSheet_SetCurSel(::GetParent(hwnd), NULL, 1);
         break;
     }
     return 0;
@@ -95,15 +88,15 @@ void Page1_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify)
     case edt1:
         if (codeNotify == EN_CHANGE)
         {
-            PropSheet_Changed(GetParent(hwnd), hwnd);
+            PropSheet_Changed(::GetParent(hwnd), hwnd);
             break;
         }
         break;
     case psh1:
-        PropSheet_PressButton(GetParent(hwnd), PSBTN_APPLYNOW);
+        PropSheet_PressButton(::GetParent(hwnd), PSBTN_APPLYNOW);
         break;
     case psh2:
-        PropSheet_UnChanged(GetParent(hwnd), hwnd);
+        PropSheet_UnChanged(::GetParent(hwnd), hwnd);
         break;
     }
 }
@@ -120,23 +113,16 @@ LRESULT Page1_OnNotify(HWND hwnd, int idFrom, LPNMHDR pnmhdr)
         MessageBox(hwnd, TEXT("Page1 applied!"), TEXT("Info"), MB_ICONINFORMATION);
         //SetWindowLongPtr(hwnd, DWLP_MSGRESULT, PSNRET_INVALID_NOCHANGEPAGE); // Prevent
         SetWindowLongPtr(hwnd, DWLP_MSGRESULT, PSNRET_NOERROR); // Continue
-#ifdef MODELESS
-        if (PropSheet_GetCurrentPageHwnd(GetParent(hwnd)))
-        {
-            DestroyWindow(hwnd);
-            PostQuitMessage(0);
-        }
-#endif
         return TRUE;
     case PSN_WIZBACK:
-        PropSheet_SetCurSel(GetParent(hwnd), NULL, 0);
+        PropSheet_SetCurSel(::GetParent(hwnd), NULL, 0);
         break;
     case PSN_QUERYCANCEL:
     case PSN_WIZFINISH:
-        DestroyWindow(GetParent(hwnd));
+        ::DestroyWindow(::GetParent(hwnd));
         break;
     case PSN_WIZNEXT:
-        PropSheet_SetCurSel(GetParent(hwnd), NULL, 2);
+        PropSheet_SetCurSel(::GetParent(hwnd), NULL, 2);
         break;
     }
     return 0;
@@ -166,15 +152,15 @@ void Page2_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify)
     case edt1:
         if (codeNotify == EN_CHANGE)
         {
-            PropSheet_Changed(GetParent(hwnd), hwnd);
+            PropSheet_Changed(::GetParent(hwnd), hwnd);
             break;
         }
         break;
     case psh1:
-        PropSheet_PressButton(GetParent(hwnd), PSBTN_APPLYNOW);
+        PropSheet_PressButton(::GetParent(hwnd), PSBTN_APPLYNOW);
         break;
     case psh2:
-        PropSheet_UnChanged(GetParent(hwnd), hwnd);
+        PropSheet_UnChanged(::GetParent(hwnd), hwnd);
         break;
     }
 }
@@ -191,23 +177,16 @@ LRESULT Page2_OnNotify(HWND hwnd, int idFrom, LPNMHDR pnmhdr)
         MessageBox(hwnd, TEXT("Page2 applied!"), TEXT("Info"), MB_ICONINFORMATION);
         //SetWindowLongPtr(hwnd, DWLP_MSGRESULT, PSNRET_INVALID_NOCHANGEPAGE); // Prevent
         SetWindowLongPtr(hwnd, DWLP_MSGRESULT, PSNRET_NOERROR); // Continue
-#ifdef MODELESS
-        if (PropSheet_GetCurrentPageHwnd(GetParent(hwnd)))
-        {
-            DestroyWindow(hwnd);
-            PostQuitMessage(0);
-        }
-#endif
         return TRUE;
     case PSN_WIZBACK:
-        PropSheet_SetCurSel(GetParent(hwnd), NULL, 1);
+        PropSheet_SetCurSel(::GetParent(hwnd), NULL, 1);
         break;
     case PSN_QUERYCANCEL:
     case PSN_WIZFINISH:
-        DestroyWindow(GetParent(hwnd));
+        ::DestroyWindow(::GetParent(hwnd));
         break;
     case PSN_WIZNEXT:
-        PropSheet_SetCurSel(GetParent(hwnd), NULL, 0);
+        PropSheet_SetCurSel(::GetParent(hwnd), NULL, 0);
         break;
     }
     return 0;
@@ -231,7 +210,7 @@ WinMain(HINSTANCE   hInstance,
         LPSTR       lpCmdLine,
         INT         nCmdShow)
 {
-    InitCommonControls();
+    ::InitCommonControls();
 
     PROPSHEETPAGE psp = { sizeof(psp) };
     psp.dwFlags = PSP_DEFAULT;
@@ -241,15 +220,15 @@ WinMain(HINSTANCE   hInstance,
 
     psp.pszTemplate = MAKEINTRESOURCE(IDD_PAGE0);
     psp.pfnDlgProc = Page0DlgProc;
-    g_hpsp[iPage++] = CreatePropertySheetPage(&psp);
+    g_hpsp[iPage++] = ::CreatePropertySheetPage(&psp);
 
     psp.pszTemplate = MAKEINTRESOURCE(IDD_PAGE1);
     psp.pfnDlgProc = Page1DlgProc;
-    g_hpsp[iPage++] = CreatePropertySheetPage(&psp);
+    g_hpsp[iPage++] = ::CreatePropertySheetPage(&psp);
 
     psp.pszTemplate = MAKEINTRESOURCE(IDD_PAGE2);
     psp.pfnDlgProc = Page2DlgProc;
-    g_hpsp[iPage++] = CreatePropertySheetPage(&psp);
+    g_hpsp[iPage++] = ::CreatePropertySheetPage(&psp);
 
     assert(iPage <= _countof(g_hpsp));
 
@@ -269,7 +248,7 @@ WinMain(HINSTANCE   hInstance,
 
 #ifdef USEHICON
     psh.dwFlags |= PSH_USEHICON;
-    psh.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+    psh.hIcon = ::LoadIcon(NULL, IDI_APPLICATION);
 #endif
 
 #ifdef WIZARD
@@ -279,10 +258,17 @@ WinMain(HINSTANCE   hInstance,
 #ifdef MODELESS
     psh.dwFlags |= PSH_MODELESS;
     HWND hwndPropSheetModeless = (HWND)::PropertySheet(&psh);
+    assert(hwndPropSheetModeless);
 
     MSG msg;
     while (::GetMessage(&msg, NULL, 0, 0))
     {
+        if (!PropSheet_GetCurrentPageHwnd(hwndPropSheetModeless))
+        {
+            ::DestroyWindow(hwndPropSheetModeless);
+            break;
+        }
+
         if (PropSheet_IsDialogMessage(hwndPropSheetModeless, &msg))
             continue;
 
