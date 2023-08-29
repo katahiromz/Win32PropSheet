@@ -210,6 +210,8 @@ WinMain(HINSTANCE   hInstance,
         LPSTR       lpCmdLine,
         INT         nCmdShow)
 {
+    InitCommonControls();
+
     PROPSHEETPAGE psp = { sizeof(psp) };
     psp.dwFlags = PSP_DEFAULT;
     psp.hInstance = hInstance;

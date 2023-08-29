@@ -30,10 +30,10 @@ CAPTION "Win32PropSheet Page0"
 STYLE DS_CENTER | DS_MODALFRAME | WS_POPUPWINDOW | WS_CAPTION
 FONT 9, "MS Shell Dlg"
 {
+    LTEXT "PAGE0", -1, 10, 10, 32, 32
+    EDITTEXT edt1, 88, 27, 60, 14, ES_AUTOHSCROLL
     PUSHBUTTON "Apply Now", psh1, 14, 62, 60, 14
     PUSHBUTTON "UnChange", psh2, 43, 101, 60, 14
-    EDITTEXT edt1, 88, 27, 60, 14, ES_AUTOHSCROLL
-    LTEXT "PAGE0", -1, 10, 10, 32, 32
 }
 
 IDD_PAGE1 DIALOG 0, 0, 215, 135
@@ -41,10 +41,10 @@ CAPTION "Win32PropSheet Page1"
 STYLE DS_CENTER | DS_MODALFRAME | WS_POPUPWINDOW | WS_CAPTION
 FONT 9, "MS Shell Dlg"
 {
+    LTEXT "PAGE1", -1, 10, 10, 32, 32
+    EDITTEXT edt1, 88, 27, 60, 14, ES_AUTOHSCROLL
     PUSHBUTTON "Apply Now", psh1, 14, 62, 60, 14
     PUSHBUTTON "UnChange", psh2, 43, 101, 60, 14
-    EDITTEXT edt1, 88, 27, 60, 14, ES_AUTOHSCROLL
-    LTEXT "PAGE1", -1, 10, 10, 32, 32
 }
 
 IDD_PAGE2 DIALOG 0, 0, 215, 135
@@ -52,10 +52,10 @@ CAPTION "Win32PropSheet Page2"
 STYLE DS_CENTER | DS_MODALFRAME | WS_POPUPWINDOW | WS_CAPTION
 FONT 9, "MS Shell Dlg"
 {
+    LTEXT "PAGE2", -1, 10, 10, 32, 32
+    EDITTEXT edt1, 88, 27, 60, 14, ES_AUTOHSCROLL
     PUSHBUTTON "Apply Now", psh1, 14, 62, 60, 14
     PUSHBUTTON "UnChange", psh2, 43, 101, 60, 14
-    EDITTEXT edt1, 88, 27, 60, 14, ES_AUTOHSCROLL
-    LTEXT "PAGE2", -1, 10, 10, 32, 32
 }
 
 //////////////////////////////////////////////////////////////////////////////
