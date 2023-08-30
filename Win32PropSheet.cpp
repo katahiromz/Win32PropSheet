@@ -9,7 +9,7 @@
 #define PROPTITLE
 //#define WIZARD
 //#define NOAPPLYNOW
-#define PARENT
+//#define PARENT
 
 #ifdef PARENT
     #undef MODELESS
