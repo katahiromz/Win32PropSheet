@@ -6,6 +6,7 @@
 #define IDD_PAGE0                           100
 #define IDD_PAGE1                           101
 #define IDD_PAGE2                           102
+#define IDD_PARENT                          103
 
 #ifdef APSTUDIO_INVOKED
     #ifndef APSTUDIO_READONLY_SYMBOLS

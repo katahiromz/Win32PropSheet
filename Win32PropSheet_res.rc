@@ -58,6 +58,14 @@ FONT 9, "MS Shell Dlg"
     PUSHBUTTON "UnChange", psh2, 43, 101, 60, 14
 }
 
+IDD_PARENT DIALOG 0, 0, 215, 135
+CAPTION "Win32PropSheet Parent"
+STYLE DS_CENTER | DS_MODALFRAME | WS_POPUPWINDOW | WS_CAPTION
+FONT 9, "MS Shell Dlg"
+{
+    PUSHBUTTON "Open PropSheet", IDOK, 26, 24, 124, 79
+}
+
 //////////////////////////////////////////////////////////////////////////////
 // TEXTINCLUDE
 

@@ -9,6 +9,11 @@
 #define PROPTITLE
 //#define WIZARD
 //#define NOAPPLYNOW
+#define PARENT
+
+#ifdef PARENT
+    #undef MODELESS
+#endif
 
 HPROPSHEETPAGE g_hpsp[3];
 
@@ -204,14 +209,8 @@ Page2DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     return 0;
 }
 
-INT WINAPI
-WinMain(HINSTANCE   hInstance,
-        HINSTANCE   hPrevInstance,
-        LPSTR       lpCmdLine,
-        INT         nCmdShow)
+INT DoIt(HINSTANCE hInstance, HWND hwndParent)
 {
-    ::InitCommonControls();
-
     PROPSHEETPAGE psp = { sizeof(psp) };
     psp.dwFlags = PSP_DEFAULT;
     psp.hInstance = hInstance;
@@ -241,7 +240,7 @@ WinMain(HINSTANCE   hInstance,
     psh.dwFlags |= PSH_PROPTITLE;
 #endif
     psh.hInstance = hInstance;
-    psh.hwndParent = NULL;
+    psh.hwndParent = hwndParent;
     psh.nPages = iPage;
     psh.phpage = g_hpsp;
     psh.pszCaption = TEXT("Win32PropSheet");
@@ -280,4 +279,43 @@ WinMain(HINSTANCE   hInstance,
 #endif
 
     return 0;
+}
+
+void Parent_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify)
+{
+    switch (id)
+    {
+    case IDOK:
+        DoIt(GetModuleHandle(NULL), hwnd);
+        break;
+    case IDCANCEL:
+        EndDialog(hwnd, id);
+        break;
+    }
+}
+
+INT_PTR CALLBACK
+ParentDialogProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+    switch (uMsg)
+    {
+        HANDLE_MSG(hwnd, WM_COMMAND, Parent_OnCommand);
+    }
+    return 0;
+}
+
+INT WINAPI
+WinMain(HINSTANCE   hInstance,
+        HINSTANCE   hPrevInstance,
+        LPSTR       lpCmdLine,
+        INT         nCmdShow)
+{
+    ::InitCommonControls();
+
+#ifdef PARENT
+    DialogBox(hInstance, MAKEINTRESOURCE(IDD_PARENT), NULL, ParentDialogProc);
+    return 0;
+#else
+    return DoIt(hInstance, NULL);
+#endif
 }
